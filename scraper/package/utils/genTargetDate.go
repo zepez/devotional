@@ -1,11 +1,11 @@
-package main
+package utils
 
 import (
 	"net/url"
 	"time"
 )
 
-func getTargetDate(queries url.Values) string {
+func GenTargetDate(queries url.Values) string {
 	query, queryExists := queries["date"]
 
 	date := ""

@@ -7,35 +7,26 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+
+	u "scraper/package/utils"
 )
 
-type Devotional struct {
-	Id          string    `json:"id"`
-	Source      string    `json:"source"`
-	Name        string    `json:"name"`
-	Html        string    `json:"html"`
-	Plain       string    `json:"plain_text"`
-	Target_Date string    `json:"target_date"`
-	Created_at  time.Time `json:"created_at"`
-	Updated_at  time.Time `json:"updated_at"`
-}
-
 func root(w http.ResponseWriter, r *http.Request) {
-	devotional := Devotional{}
+	devotional := u.Devotional{}
 
 	devotional.Id = uuid.Must(uuid.NewRandom()).String()
 	devotional.Created_at = time.Now()
 	devotional.Updated_at = time.Now()
-	devotional.Target_Date = getTargetDate(r.URL.Query())
-	devotional.Source = GetLink(devotional.Target_Date)
+	devotional.Target_Date = u.GenTargetDate(r.URL.Query())
+	devotional.Source = u.GenLink(devotional.Target_Date)
 
-	html, plain, name := Scrape(devotional.Source)
+	html, plain, name := u.Scrape(devotional.Source)
 
 	devotional.Name = name
 	devotional.Html = html
 	devotional.Plain = plain
 
-	fmt.Fprintf(w, ToJson(devotional))
+	fmt.Fprintf(w, u.GenJson(devotional))
 }
 
 func handleRequests() {

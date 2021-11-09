@@ -1,5 +1,5 @@
-package main
+package utils
 
-func GetLink(date string) string {
+func GenLink(date string) string {
 	return "https://www.lhm.org/dailydevotions/default.asp?date=" + date
 }

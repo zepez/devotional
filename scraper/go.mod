@@ -1,4 +1,4 @@
-module github.com/zepez/devotional
+module scraper
 
 go 1.15
 

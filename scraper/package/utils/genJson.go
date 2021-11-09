@@ -1,8 +1,8 @@
-package main
+package utils
 
 import "encoding/json"
 
-func ToJson(i Devotional) string {
+func GenJson(i Devotional) string {
 	j, err := json.Marshal(i)
 	if err != nil {
 		panic(err)

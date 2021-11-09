@@ -6,7 +6,11 @@ This is the respository for a daily devotional web scraper.
 
 ## 🖊 Notes
 
-https://www.lhm.org/dailydevotions/default.asp?date=20211109
+ - x
+
+## 🤔 Examples
+
+Check out the examples dir for more information.
 
 ## ✅ To do
 
