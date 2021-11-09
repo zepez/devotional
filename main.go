@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 	"time"
 
 	"github.com/google/uuid"
@@ -17,10 +19,12 @@ type Devotional struct {
 	Updated_at time.Time `json:"updatedAt"`
 }
 
-func main() {
+func root(w http.ResponseWriter, r *http.Request) {
 	devotional := Devotional{}
 	devotional.Id = uuid.Must(uuid.NewRandom()).String()
-	devotional.Source = GetLink("20211109")
+
+	currentTime := time.Now()
+	devotional.Source = GetLink(currentTime.Format("20060102"))
 
 	html, plain, name := Scrape(devotional.Source)
 
@@ -29,4 +33,14 @@ func main() {
 	devotional.Plain = plain
 
 	fmt.Println(ToJson(devotional))
+	fmt.Fprintf(w, ToJson(devotional))
+}
+
+func handleRequests() {
+	http.HandleFunc("/", root)
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func main() {
+	handleRequests()
 }
