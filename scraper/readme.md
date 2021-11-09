@@ -1,8 +1,6 @@
 
 
-## ‽ Daily Devotional Web Scraper
-
-This is the respository for a daily devotional web scraper.
+# ‽ Daily Devotional Web Scraper
 
 ## 🖊 Notes
 
@@ -14,10 +12,6 @@ This is the respository for a daily devotional web scraper.
 ## 🤔 Examples
 
 [Check out the examples dir for example requests and example responses.](https://github.com/zepez/devotional/tree/main/scraper/examples)
-
-## ✅ To do
-
-- dockerize/containerize the server
 
 
 
