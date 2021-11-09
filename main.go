@@ -23,6 +23,9 @@ func root(w http.ResponseWriter, r *http.Request) {
 	devotional := Devotional{}
 
 	devotional.Id = uuid.Must(uuid.NewRandom()).String()
+	devotional.Created_at = time.Now()
+	devotional.Updated_at = time.Now()
+
 	devotional.Source = GetLink(r.URL.Query())
 
 	html, plain, name := Scrape(devotional.Source)
