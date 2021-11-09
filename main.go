@@ -2,55 +2,28 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
-
-	"github.com/PuerkitoBio/goquery"
+	"time"
 )
 
-func Scrape() (string, string) {
-	// Request the HTML page.
-	res, err := http.Get("https://www.lhm.org/dailydevotions/default.asp?date=20211109")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer res.Body.Close()
-	if res.StatusCode != 200 {
-		log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
-	}
-
-	// Load the HTML document
-	doc, err := goquery.NewDocumentFromReader(res.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	wrapper := doc.Find(".post-body")
-
-	plain := ""
-	html := ""
-
-	wrapper.Find("p").Each(func(i int, s *goquery.Selection) {
-		if i == 0 || i == 1 {
-			paraHtml, err := goquery.OuterHtml(s)
-			html = html + paraHtml
-			paraPlain := s.Text()
-			plain = plain + paraPlain
-
-			if err != nil {
-				log.Fatal(err)
-			}
-		}
-	})
-
-	return html, plain
+type Devotional struct {
+	Id     string `json:"id"`
+	Source string `json:"source"`
+	// Slug       string    `json:"slug"`
+	Name       string    `json:"name"`
+	Html       string    `json:"html"`
+	Plain      string    `json:"plainText"`
+	Created_at time.Time `json:"createdAt"`
+	Updated_at time.Time `json:"updatedAt"`
 }
 
 func main() {
-	html, plain := Scrape()
+	devotional := Devotional{}
+	devotional.Source = GetLink("20211109")
 
-	fmt.Println("============HTML============")
-	fmt.Println(html)
-	fmt.Println("============PLAIN============")
-	fmt.Println(plain)
+	html, plain := Scrape(devotional.Source)
+
+	devotional.Html = html
+	devotional.Plain = plain
+
+	fmt.Println(devotional)
 }
