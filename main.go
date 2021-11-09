@@ -10,13 +10,14 @@ import (
 )
 
 type Devotional struct {
-	Id         string    `json:"id"`
-	Source     string    `json:"source"`
-	Name       string    `json:"name"`
-	Html       string    `json:"html"`
-	Plain      string    `json:"plainText"`
-	Created_at time.Time `json:"createdAt"`
-	Updated_at time.Time `json:"updatedAt"`
+	Id          string    `json:"id"`
+	Source      string    `json:"source"`
+	Name        string    `json:"name"`
+	Html        string    `json:"html"`
+	Plain       string    `json:"plain_text"`
+	Target_Date string    `json:"target_date"`
+	Created_at  time.Time `json:"created_at"`
+	Updated_at  time.Time `json:"updated_at"`
 }
 
 func root(w http.ResponseWriter, r *http.Request) {
@@ -25,8 +26,8 @@ func root(w http.ResponseWriter, r *http.Request) {
 	devotional.Id = uuid.Must(uuid.NewRandom()).String()
 	devotional.Created_at = time.Now()
 	devotional.Updated_at = time.Now()
-
-	devotional.Source = GetLink(r.URL.Query())
+	devotional.Target_Date = getTargetDate(r.URL.Query())
+	devotional.Source = GetLink(devotional.Target_Date)
 
 	html, plain, name := Scrape(devotional.Source)
 
