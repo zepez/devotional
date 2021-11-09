@@ -21,10 +21,9 @@ type Devotional struct {
 
 func root(w http.ResponseWriter, r *http.Request) {
 	devotional := Devotional{}
-	devotional.Id = uuid.Must(uuid.NewRandom()).String()
 
-	currentTime := time.Now()
-	devotional.Source = GetLink(currentTime.Format("20060102"))
+	devotional.Id = uuid.Must(uuid.NewRandom()).String()
+	devotional.Source = GetLink(r.URL.Query())
 
 	html, plain, name := Scrape(devotional.Source)
 
@@ -32,7 +31,6 @@ func root(w http.ResponseWriter, r *http.Request) {
 	devotional.Html = html
 	devotional.Plain = plain
 
-	fmt.Println(ToJson(devotional))
 	fmt.Fprintf(w, ToJson(devotional))
 }
 
