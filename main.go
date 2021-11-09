@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"time"
+
+	"github.com/google/uuid"
 )
 
 type Devotional struct {
-	Id     string `json:"id"`
-	Source string `json:"source"`
-	// Slug       string    `json:"slug"`
+	Id         string    `json:"id"`
+	Source     string    `json:"source"`
 	Name       string    `json:"name"`
 	Html       string    `json:"html"`
 	Plain      string    `json:"plainText"`
@@ -18,12 +19,14 @@ type Devotional struct {
 
 func main() {
 	devotional := Devotional{}
+	devotional.Id = uuid.Must(uuid.NewRandom()).String()
 	devotional.Source = GetLink("20211109")
 
-	html, plain := Scrape(devotional.Source)
+	html, plain, name := Scrape(devotional.Source)
 
+	devotional.Name = name
 	devotional.Html = html
 	devotional.Plain = plain
 
-	fmt.Println(devotional)
+	fmt.Println(ToJson(devotional))
 }

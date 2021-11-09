@@ -3,11 +3,12 @@ package main
 import (
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-func Scrape(link string) (string, string) {
+func Scrape(link string) (string, string, string) {
 	// request
 	res, err := http.Get(link)
 	if err != nil {
@@ -28,6 +29,7 @@ func Scrape(link string) (string, string) {
 
 	plain := ""
 	html := ""
+	name := ""
 
 	wrapper.Find("p").Each(func(i int, s *goquery.Selection) {
 		if i == 0 || i == 1 {
@@ -42,5 +44,7 @@ func Scrape(link string) (string, string) {
 		}
 	})
 
-	return html, plain
+	name = wrapper.Find("h2").Text()
+
+	return strings.TrimSpace(html), strings.TrimSpace(plain), strings.TrimSpace(name)
 }
