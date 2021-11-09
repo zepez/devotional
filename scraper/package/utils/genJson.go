@@ -2,11 +2,11 @@ package utils
 
 import "encoding/json"
 
-func GenJson(i Devotional) string {
+func GenJson(i interface{}) []byte {
 	j, err := json.Marshal(i)
 	if err != nil {
 		panic(err)
 	}
 
-	return string(j)
+	return j
 }
