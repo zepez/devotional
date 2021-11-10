@@ -15,7 +15,7 @@ This is the mega-respository for my daily devotionals application.
 
 ## ✅ To do
 
-- dockerize/containerize the web-scraper server
+- add tests to the web-scraper
 - add more details to readme.md
 - start on backend
 - start on frontend

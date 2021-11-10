@@ -1,0 +1,30 @@
+# syntax=docker/dockerfile:1
+
+# cache
+FROM golang:1.16-buster AS build
+
+WORKDIR /app
+
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
+
+COPY . .
+ADD ./package ./usr/local/go/src/scraper
+
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /scraper
+
+## final
+FROM gcr.io/distroless/base-debian10
+
+ENV TZ="America/New_York"
+
+WORKDIR /
+
+COPY --from=build /scraper /scraper
+
+EXPOSE 8080
+
+USER nonroot:nonroot
+
+ENTRYPOINT ["/scraper"]
