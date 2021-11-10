@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 cd ../scraper
-echo "==================scraper==================" > ../scripts/results.txt  
+echo "==================scraper==================" > ../scripts/test_results.txt  
 ls
-go test -v ./... >> ../scripts/results.txt  
+go test -v ./... >> ../scripts/test_results.txt  
 
 cd ../backend
-echo "==================backend==================" >> ../scripts/results.txt  
-ls >> ../scripts/results.txt  
+echo "==================backend==================" >> ../scripts/test_results.txt  
+ls >> ../scripts/test_results.txt  
 
 cd ../frontend
-echo "==================frontend==================" >> ../scripts/results.txt  
-ls >> ../scripts/results.txt  
+echo "==================frontend==================" >> ../scripts/test_results.txt  
+ls >> ../scripts/test_results.txt  
 
 cd ../scripts
 
