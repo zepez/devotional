@@ -2,7 +2,7 @@
 
 cd ../scraper
 echo "==================scraper==================" > ../logs/build.log  
-go build
+go build >> ../logs/build.log
 
 cd ../backend
 echo "==================backend==================" >> ../logs/build.log  
