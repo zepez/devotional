@@ -18,9 +18,9 @@ This is the mega-respository for my devotionals application.
 
 ## ✅ To do
 
-- add more details to readme.md
-- start on backend
-- start on frontend
+- [x] add more details to readme.md
+- [ ] start on backend
+- [ ] start on frontend
 
 
 
