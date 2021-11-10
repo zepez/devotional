@@ -25,7 +25,6 @@ func GetDevotionals(c *gin.Context, collection *mongo.Collection) {
 	}
 
 	for cursor.Next(context.TODO()) {
-		//Create a value into which the single document can be decoded
 		var res def.Devotional
 		err := cursor.Decode(&res)
 		if err != nil {
