@@ -1,8 +1,8 @@
 
 
-# ✨ Daily Devotional Application
+# ✨ Devotional Application
 
-This is the mega-respository for my daily devotionals application.
+This is the mega-respository for my devotionals application.
 
 
 ## 🤔 Structure

@@ -1,6 +1,6 @@
 
 
-# ✨ Daily Devotional Web Scraper
+# ✨ Devotional Web Scraper
 
 ## 🖊 Notes
 
