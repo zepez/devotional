@@ -32,11 +32,12 @@ func Root(w http.ResponseWriter, r *http.Request, c *cache.Cache) {
 	devotional.Source = u.GenLink(devotional.Target_Date)
 
 	// actual devotional content
-	html, plain, name := u.Scrape(devotional.Source)
+	html, plain, name, image := u.Scrape(devotional.Source)
 
 	devotional.Name = name
 	devotional.Html = html
 	devotional.Plain = plain
+	devotional.Image = image
 
 	// cache the newly scraped content
 	c.Set(devotional.Target_Date, devotional, cache.DefaultExpiration)

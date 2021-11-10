@@ -8,7 +8,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func Scrape(link string) (string, string, string) {
+func Scrape(link string) (string, string, string, string) {
 	// request
 	res, err := http.Get(link)
 	if err != nil {
@@ -30,6 +30,7 @@ func Scrape(link string) (string, string, string) {
 	plain := ""
 	html := ""
 	name := ""
+	image := ""
 
 	wrapper.Find("p").Each(func(i int, s *goquery.Selection) {
 		if i == 0 || i == 1 {
@@ -46,5 +47,17 @@ func Scrape(link string) (string, string, string) {
 
 	name = wrapper.Find("h2").Text()
 
-	return strings.TrimSpace(html), strings.TrimSpace(plain), strings.TrimSpace(name)
+	wrapper.Find("img").Each(func(i int, s *goquery.Selection) {
+		source, _ := s.Attr("src")
+		validImg := strings.Contains(source, "https")
+		if validImg {
+			image = source
+		}
+
+		if err != nil {
+			log.Fatal(err)
+		}
+	})
+
+	return strings.TrimSpace(html), strings.TrimSpace(plain), strings.TrimSpace(name), strings.TrimSpace(image)
 }
