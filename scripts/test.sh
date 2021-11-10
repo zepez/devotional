@@ -2,7 +2,6 @@
 
 cd ../scraper
 echo "==================scraper==================" > ../scripts/test_results.txt  
-ls
 go test -v ./... >> ../scripts/test_results.txt  
 
 cd ../backend
