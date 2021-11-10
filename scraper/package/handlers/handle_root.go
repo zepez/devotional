@@ -1,4 +1,4 @@
-package utils
+package handlers
 
 import (
 	"net/http"
@@ -6,26 +6,22 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/patrickmn/go-cache"
+
+	u "scraper/package/utils"
 )
 
-func HealthRoute(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusAccepted)
-	return
-}
-
-func RootRoute(w http.ResponseWriter, r *http.Request, c *cache.Cache) {
+func Root(w http.ResponseWriter, r *http.Request, c *cache.Cache) {
 	// set headers
 	w.Header().Set("Content-Type", "application/json")
 
 	// instantiate new devotional struct
-	devotional := Devotional{}
-	devotional.Target_Date = GenTargetDate(r.URL.Query())
+	devotional := u.Devotional{}
+	devotional.Target_Date = u.GenTargetDate(r.URL.Query())
 
 	// respond with cached devotional if exists
 	cachedContent, found := c.Get(devotional.Target_Date)
 	if found {
-		w.Write(GenJson(cachedContent))
+		w.Write(u.GenJson(cachedContent))
 		return
 	}
 
@@ -33,10 +29,10 @@ func RootRoute(w http.ResponseWriter, r *http.Request, c *cache.Cache) {
 	devotional.Id = uuid.Must(uuid.NewRandom()).String()
 	devotional.Created_at = time.Now()
 	devotional.Updated_at = time.Now()
-	devotional.Source = GenLink(devotional.Target_Date)
+	devotional.Source = u.GenLink(devotional.Target_Date)
 
 	// actual devotional content
-	html, plain, name := Scrape(devotional.Source)
+	html, plain, name := u.Scrape(devotional.Source)
 
 	devotional.Name = name
 	devotional.Html = html
@@ -46,6 +42,6 @@ func RootRoute(w http.ResponseWriter, r *http.Request, c *cache.Cache) {
 	c.Set(devotional.Target_Date, devotional, cache.DefaultExpiration)
 
 	// response
-	w.Write(GenJson(devotional))
+	w.Write(u.GenJson(devotional))
 	return
 }

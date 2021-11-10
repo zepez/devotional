@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 	"time"
 
-	u "scraper/package/utils"
+	handle "scraper/package/handlers"
 
 	"github.com/patrickmn/go-cache"
 )
@@ -16,6 +18,12 @@ func main() {
 	// start message
 	fmt.Println("Scraping server started on http://localhost:8080")
 
-	// handle req and pass cache
-	u.HandleRequests(c)
+	// root, scraping route
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { handle.Root(w, r, c) })
+
+	// healthcheck route
+	http.HandleFunc("/health", handle.Health)
+
+	// define port / log errors
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
