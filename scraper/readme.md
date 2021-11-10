@@ -1,6 +1,6 @@
 
 
-# ‽ Daily Devotional Web Scraper
+# ✨ Daily Devotional Web Scraper
 
 ## 🖊 Notes
 
@@ -13,7 +13,32 @@
 
 [Check out the examples dir for example requests and example responses.](https://github.com/zepez/devotional/tree/main/scraper/examples)
 
+## 🌟 Scripts
 
+Assumes that your current directory is this project root (devotional/scraper)
+
+- Testing
+
+  `go test -v ./...`
+
+- Building
+
+  `go build`
+
+- Running
+
+  `./scraper`
+
+
+## 🐳 Docker 
+
+- Building
+
+  `docker build .`
+
+- Running 
+  
+  `docker run -p 8080:8080 <image_hash>`
 
 
 
