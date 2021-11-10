@@ -19,6 +19,7 @@ This is the mega-respository for my devotionals application.
 ## ✅ To do
 
 - [x] add more details to readme.md
+- [ ] change scraper to use gin (i like using it, its clean)
 - [ ] start on backend
 - [ ] start on frontend
 

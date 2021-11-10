@@ -6,7 +6,7 @@ go test -v ./... >> ../logs/test.log
 
 cd ../backend
 echo "==================backend==================" >> ../logs/test.log  
-ls >> ../logs/test.log  
+go test -v ./... >> ../logs/test.log  
 
 cd ../frontend
 echo "==================frontend==================" >> ../logs/test.log  

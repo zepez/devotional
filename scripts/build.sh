@@ -6,7 +6,7 @@ go build >> ../logs/build.log
 
 cd ../backend
 echo "==================backend==================" >> ../logs/build.log  
-ls >> ../logs/build.log  
+go build >> ../logs/build.log
 
 cd ../frontend
 echo "==================frontend==================" >> ../logs/build.log  
