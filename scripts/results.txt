@@ -1,0 +1,17 @@
+==================scraper==================
+?   	scraper	[no test files]
+?   	scraper/package/handlers	[no test files]
+=== RUN   TestGenJson
+--- PASS: TestGenJson (0.00s)
+=== RUN   TestGenLink
+--- PASS: TestGenLink (0.00s)
+=== RUN   TestGenLinkEmpty
+--- PASS: TestGenLinkEmpty (0.00s)
+=== RUN   TestScrape
+--- PASS: TestScrape (0.88s)
+PASS
+ok  	scraper/package/utils	(cached)
+==================backend==================
+readme.md
+==================frontend==================
+readme.md
