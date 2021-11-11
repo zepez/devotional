@@ -2,6 +2,7 @@ package main
 
 import (
 	handler "backend/package/handlers"
+	jobs "backend/package/jobs"
 	"context"
 	"log"
 	"time"
@@ -38,6 +39,8 @@ func main() {
 	// route definitions
 	router.GET("/devotional", func(c *gin.Context) { handler.GetDevotional(c, collection) })
 	router.GET("/devotionals", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
+
+	jobs.PutScraped(collection, ctx)
 
 	// default port 8080 can be changed via env
 	router.Run()
