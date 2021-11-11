@@ -20,6 +20,7 @@ This is the mega-respository for my devotionals application.
 
 - [ ] Scraper
   - [ ] change scraper to use gin (just because I like gin)
+  - [ ] use consistent logging (use backend for reference)
 - [ ] Backend
   - [ ] give backend a proper readme
   - [ ] add env for scraper link
