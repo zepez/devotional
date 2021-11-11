@@ -9,16 +9,16 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-func PutDevotionalUtil(collection *mongo.Collection, ctx context.Context, devotional def.Devotional) def.Devotional {
+func PutDevotionalUtil(collection *mongo.Collection, ctx context.Context, devotional def.Devotional) *mongo.InsertOneResult {
 	bson, err := bson.Marshal(devotional)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	_, err = collection.InsertOne(ctx, bson)
+	response, err := collection.InsertOne(ctx, bson)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	return devotional
+	return response
 }

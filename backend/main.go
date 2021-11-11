@@ -4,10 +4,11 @@ import (
 	handler "backend/package/handlers"
 	jobs "backend/package/jobs"
 	"context"
+	"fmt"
 	"log"
-	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/robfig/cron/v3"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -17,14 +18,13 @@ func main() {
 	router := gin.Default()
 
 	// create database client
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://127.0.0.1:27017/"))
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// create context
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	ctx := context.Background()
 
 	// connect client
 	err = client.Connect(ctx)
@@ -40,7 +40,14 @@ func main() {
 	router.GET("/devotional", func(c *gin.Context) { handler.GetDevotional(c, collection) })
 	router.GET("/devotionals", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
 
-	jobs.PutScraped(collection, ctx)
+	// start jobs
+	job := cron.New()
+	fmt.Println("[jobs] scheduling | scrape | 0 * * * * *")
+	job.AddFunc("@every 30s", func() { jobs.PutScraped(collection, ctx) })
+	job.Start()
+	// defer job.Stop()
+
+	fmt.Println(job.Entries())
 
 	// default port 8080 can be changed via env
 	router.Run()
