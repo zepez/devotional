@@ -16,7 +16,7 @@ func main() {
 	c := cache.New(24*time.Hour, 10*time.Minute)
 
 	// start message
-	fmt.Println("Scraping server started on http://localhost:8080")
+	fmt.Println("Scraping server started on http://localhost:8081")
 
 	// root, scraping route
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { handle.Root(w, r, c) })
@@ -25,5 +25,5 @@ func main() {
 	http.HandleFunc("/health", handle.Health)
 
 	// define port / log errors
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8081", nil))
 }
