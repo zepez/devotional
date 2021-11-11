@@ -18,10 +18,17 @@ This is the mega-respository for my devotionals application.
 
 ## ✅ To do
 
-- [x] add more details to readme.md
-- [ ] change scraper to use gin (i like using it, its clean)
-- [ ] start on backend
-- [ ] start on frontend
+- [ ] Scraper
+  - [ ] change scraper to use gin (just because I like gin)
+- [ ] Backend
+  - [ ] give backend a proper readme
+  - [ ] add env for scraper link
+  - [ ] add env for scraper frequency
+  - [ ] dockerize
+  - [ ] add pagination to /devotionals route
+  - [ ] add healthcheck route
+- [ ] Frontend
+  - [ ] start
 
 
 
