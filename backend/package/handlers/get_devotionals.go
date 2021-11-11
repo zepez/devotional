@@ -1,42 +1,17 @@
 package handlers
 
 import (
-	"context"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 
-	def "backend/package/definitions"
+	u "backend/package/utils"
 )
 
 func GetDevotionals(c *gin.Context, collection *mongo.Collection) {
-	var results []def.Devotional
 
-	findOptions := options.Find()
-	findOptions.SetLimit(5)
-
-	cursor, err := collection.Find(context.TODO(), bson.D{})
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for cursor.Next(context.TODO()) {
-		var res def.Devotional
-		err := cursor.Decode(&res)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		results = append(results, res)
-	}
-
-	if err := cursor.Err(); err != nil {
-		log.Fatal(err)
-	}
+	results := u.GetDevotionalsUtil(collection)
 
 	c.JSON(http.StatusOK, results)
 }
