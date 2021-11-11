@@ -8,7 +8,7 @@ This is the mega-respository for my devotionals application.
 ## 🤔 Structure
 
  - frontend - likely a server-side rendered application (nuxt maybe?)
- - backend - api that will interact with web-scraper (written in go and that's all I know so far)
+ - [backend](https://github.com/zepez/devotional/tree/main/backend)
  - [webscraper](https://github.com/zepez/devotional/tree/main/scraper)
 
 ## 🖊 Notes
