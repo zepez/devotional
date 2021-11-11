@@ -10,8 +10,8 @@ import (
 )
 
 func PutScraped(collection *mongo.Collection, ctx context.Context) {
-	fmt.Println("[jobs] running | scrape | 0 * * * * *")
+	fmt.Println("[devotional/backend/jobs] running | scrape | 0 * * * * *")
 	scraped := u.GetScrapedUtil()
 	u.PutDevotionalUtil(collection, ctx, scraped)
-	fmt.Printf("[jobs] finish | scrape | 0 * * * * *")
+	fmt.Println("[devotional/backend/jobs] finish | scrape | 0 * * * * *")
 }

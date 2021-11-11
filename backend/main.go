@@ -42,12 +42,10 @@ func main() {
 
 	// start jobs
 	job := cron.New()
-	fmt.Println("[jobs] scheduling | scrape | 0 * * * * *")
+	fmt.Println("[devotional/backend/jobs] scheduling | scrape | 0 * * * * *")
 	job.AddFunc("@every 30s", func() { jobs.PutScraped(collection, ctx) })
 	job.Start()
 	// defer job.Stop()
-
-	fmt.Println(job.Entries())
 
 	// default port 8080 can be changed via env
 	router.Run()
