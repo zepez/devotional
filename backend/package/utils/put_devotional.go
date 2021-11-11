@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -23,12 +24,12 @@ func PutDevotionalUtil(collection *mongo.Collection, ctx context.Context, devoti
 
 	// log if existing is found
 	if existingDevotional.Id != "" {
-		fmt.Println("[devotional/backend/utils] put | existing devotional found, aborting")
+		fmt.Printf("[devotional/backend/utils] create | abort | %s \n", time.Now())
 	}
 
 	// only insert devotional if no document matches
 	if err == mongo.ErrNoDocuments {
-		fmt.Println("[devotional/backend/utils] put | no existing devotional found, inserting")
+		fmt.Printf("[devotional/backend/utils] create | insert | %s \n", time.Now())
 		_, err = collection.InsertOne(ctx, bsonDevotional)
 	} else if err != nil {
 		log.Fatal(err)

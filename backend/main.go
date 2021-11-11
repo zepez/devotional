@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/robfig/cron/v3"
@@ -18,7 +20,7 @@ func main() {
 	router := gin.Default()
 
 	// create database client
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://127.0.0.1:27017/"))
+	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("DEVOTIONAL_BACKEND_MONGO_URI")))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -42,8 +44,8 @@ func main() {
 
 	// start jobs
 	job := cron.New()
-	fmt.Println("[devotional/backend/jobs] scheduling | scrape | 0 * * * * *")
-	job.AddFunc("@every 30s", func() { jobs.PutScraped(collection, ctx) })
+	fmt.Printf("[devotional/backend/jobs] scrape | scheduling %s | %s \n", os.Getenv("DEVOTIONAL_BACKEND_SCRAPER_FREQ"), time.Now())
+	job.AddFunc(os.Getenv("DEVOTIONAL_BACKEND_SCRAPER_FREQ"), func() { jobs.PutScraped(collection, ctx) })
 	job.Start()
 	// defer job.Stop()
 

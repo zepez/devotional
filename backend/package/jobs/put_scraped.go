@@ -3,6 +3,7 @@ package jobs
 import (
 	"context"
 	"fmt"
+	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 
@@ -10,8 +11,8 @@ import (
 )
 
 func PutScraped(collection *mongo.Collection, ctx context.Context) {
-	fmt.Println("[devotional/backend/jobs] running | scrape | 0 * * * * *")
+	fmt.Printf("[devotional/backend/jobs] scrape | start | %s \n", time.Now())
 	scraped := u.GetScrapedUtil()
 	u.PutDevotionalUtil(collection, ctx, scraped)
-	fmt.Println("[devotional/backend/jobs] finish | scrape | 0 * * * * *")
+	fmt.Printf("[devotional/backend/jobs] scrape | finish | %s \n", time.Now())
 }
