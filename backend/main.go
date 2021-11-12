@@ -17,7 +17,7 @@ import (
 
 func main() {
 	// start message
-	fmt.Printf("[devotional/backend/jobs] server | starting | %s \n", time.Now())
+	fmt.Printf("[devotional/backend/server] server | starting | %s \n", time.Now())
 
 	// create database client
 	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("DEVOTIONAL_BACKEND_MONGO_URI")))
