@@ -2,28 +2,29 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
 	"time"
 
-	handle "scraper/package/handlers"
-
+	"github.com/gin-gonic/gin"
 	"github.com/patrickmn/go-cache"
+
+	handler "scraper/package/handlers"
 )
 
 func main() {
-	// instantiate cache with default expiration
-	c := cache.New(24*time.Hour, 10*time.Minute)
-
 	// start message
-	fmt.Println("Scraping server started on http://localhost:8081")
+	fmt.Printf("[devotional/backend/server] server | starting | %s", time.Now())
 
-	// root, scraping route
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) { handle.Root(w, r, c) })
+	// instantiate cache with default expiration
+	cache := cache.New(24*time.Hour, 10*time.Minute)
+	fmt.Printf("[devotional/backend/server] cache | created | %s", time.Now())
 
-	// healthcheck route
-	http.HandleFunc("/health", handle.Health)
+	// create router
+	router := gin.Default()
 
-	// define port / log errors
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	// define routes
+	router.GET("/health", func(c *gin.Context) { handler.GetHealth(c) })
+	router.GET("/", func(c *gin.Context) { handler.GetRoot(c, cache) })
+
+	// start server
+	router.Run()
 }

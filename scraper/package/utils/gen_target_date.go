@@ -1,20 +1,12 @@
 package utils
 
 import (
-	"net/url"
 	"time"
 )
 
-func GenTargetDate(queries url.Values) string {
-	query, queryExists := queries["date"]
+func GenTargetDate(date string) string {
 
-	date := ""
-
-	if queryExists {
-		date = query[0]
-	}
-
-	if !queryExists {
+	if len(date) < 1 {
 		currentTime := time.Now()
 		date = currentTime.Format("20060102")
 	}

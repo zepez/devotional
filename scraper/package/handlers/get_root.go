@@ -4,23 +4,22 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/patrickmn/go-cache"
 
 	u "scraper/package/utils"
 )
 
-func Root(w http.ResponseWriter, r *http.Request, c *cache.Cache) {
-	// set headers
-	w.Header().Set("Content-Type", "application/json")
+func GetRoot(c *gin.Context, memcache *cache.Cache) {
 
 	// instantiate new devotional struct
 	devotional := u.Devotional{}
-	devotional.Target_Date = u.GenTargetDate(r.URL.Query())
+	devotional.Target_Date = u.GenTargetDate(c.Query("date"))
 
 	// respond with cached devotional if exists
-	cachedContent, found := c.Get(devotional.Target_Date)
+	cachedContent, found := memcache.Get(devotional.Target_Date)
 	if found {
-		w.Write(u.GenJson(cachedContent))
+		c.JSON(http.StatusOK, cachedContent)
 		return
 	}
 
@@ -38,9 +37,9 @@ func Root(w http.ResponseWriter, r *http.Request, c *cache.Cache) {
 	devotional.Image = image
 
 	// cache the newly scraped content
-	c.Set(devotional.Target_Date, devotional, cache.DefaultExpiration)
+	memcache.Set(devotional.Target_Date, devotional, cache.DefaultExpiration)
 
 	// response
-	w.Write(u.GenJson(devotional))
+	c.JSON(http.StatusOK, devotional)
 	return
 }
