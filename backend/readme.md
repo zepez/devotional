@@ -1,5 +1,4 @@
-# ✨ Devotional Web Scraper
-
+# ✨ Devotional Backend
 ## 🖊 Notes
 
  - Non-error log format: `[repo/project/type] action | result | timestamp`
