@@ -2,7 +2,7 @@
 
 # ✨ Devotional Application
 
-This is the mega-respository for my devotionals application.
+This is the respository for my devotionals application.
 
 
 ## 🤔 Structure
