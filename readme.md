@@ -22,12 +22,14 @@ This is the mega-respository for my devotionals application.
   - [ ] change scraper to use gin (just because I like gin)
   - [ ] use consistent logging (use backend for reference)
 - [ ] Backend
+  - [ ] testing
   - [ ] give backend a proper readme
-  - [ ] add env for scraper link
-  - [ ] add env for scraper frequency
-  - [ ] dockerize
-  - [ ] add pagination to /devotionals route
-  - [ ] add healthcheck route
+  - [x] add env for scraper link
+  - [x] add env for scraper frequency
+  - [x] dockerize
+  - [x] add pagination to /devotionals route
+  - [x] add query to /devotional route
+  - [x] add healthcheck route
 - [ ] Frontend
   - [ ] start
 
