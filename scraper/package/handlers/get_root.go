@@ -7,13 +7,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/patrickmn/go-cache"
 
+	define "scraper/package/definitions"
 	u "scraper/package/utils"
 )
 
 func GetRoot(c *gin.Context, memcache *cache.Cache) {
 
 	// instantiate new devotional struct
-	devotional := u.Devotional{}
+	devotional := define.Devotional{}
 	devotional.Target_Date = u.GenTargetDate(c.Query("date"))
 
 	// respond with cached devotional if exists
