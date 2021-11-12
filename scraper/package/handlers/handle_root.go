@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/patrickmn/go-cache"
 
 	u "scraper/package/utils"
@@ -26,7 +25,6 @@ func Root(w http.ResponseWriter, r *http.Request, c *cache.Cache) {
 	}
 
 	// get dovotional metadata
-	devotional.Id = uuid.Must(uuid.NewRandom()).String()
 	devotional.Created_at = time.Now()
 	devotional.Updated_at = time.Now()
 	devotional.Source = u.GenLink(devotional.Target_Date)
