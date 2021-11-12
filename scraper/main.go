@@ -12,11 +12,11 @@ import (
 
 func main() {
 	// start message
-	fmt.Printf("[devotional/backend/server] server | starting | %s", time.Now())
+	fmt.Printf("[devotional/backend/server] server | starting | %s \n", time.Now())
 
 	// instantiate cache with default expiration
 	cache := cache.New(24*time.Hour, 10*time.Minute)
-	fmt.Printf("[devotional/backend/server] cache | created | %s", time.Now())
+	fmt.Printf("[devotional/backend/server] cache | created | %s \n", time.Now())
 
 	// create router
 	router := gin.Default()
