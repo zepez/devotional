@@ -19,8 +19,11 @@ This is the mega-respository for my devotionals application.
 ## ✅ To do
 
 - [ ] Scraper
-  - [ ] change scraper to use gin (just because I like gin)
-  - [ ] use consistent logging (use backend for reference)
+  - [ ] testing
+  - [ ] move defintion from /utils to /definitions
+  - [x] remove generate json files
+  - [x] change scraper to use gin
+  - [x] use consistent logging
 - [ ] Backend
   - [ ] testing
   - [ ] give backend a proper readme
