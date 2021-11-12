@@ -23,7 +23,7 @@ func PutDevotionalUtil(collection *mongo.Collection, ctx context.Context, devoti
 	err = collection.FindOne(ctx, bsonDevotional).Decode(&existingDevotional)
 
 	// log if existing is found
-	if existingDevotional.Id != "" {
+	if existingDevotional.Source != "" {
 		fmt.Printf("[devotional/backend/utils] create | abort | %s \n", time.Now())
 	}
 

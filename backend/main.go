@@ -49,8 +49,8 @@ func main() {
 	router := gin.Default()
 
 	// route definitions
-	router.GET("/devotional", func(c *gin.Context) { handler.GetDevotional(c, collection) })
-	router.GET("/devotionals", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
+	router.GET("/devotional/:id", func(c *gin.Context) { handler.GetDevotional(c, collection) })
+	router.GET("/devotionals/:page", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
 	router.GET("/health", func(c *gin.Context) { handler.GetHealth(c) })
 
 	// default port 8080 can be changed via env

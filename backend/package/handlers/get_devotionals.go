@@ -1,8 +1,6 @@
 package handlers
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 
@@ -10,8 +8,14 @@ import (
 )
 
 func GetDevotionals(c *gin.Context, collection *mongo.Collection) {
+	page := c.Param("page")
 
-	results := u.GetDevotionalsUtil(collection)
+	results, status := u.GetDevotionalsUtil(collection, page)
 
-	c.JSON(http.StatusOK, results)
+	if status != 200 {
+		c.Writer.WriteHeader(status)
+		return
+	}
+
+	c.JSON(status, results)
 }

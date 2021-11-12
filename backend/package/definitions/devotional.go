@@ -3,7 +3,6 @@ package definitions
 import "time"
 
 type Devotional struct {
-	Id          string    `json:"_id" bson:"_id"`
 	Source      string    `json:"source" bson:"source"`
 	Name        string    `json:"name" bson:"name"`
 	Html        string    `json:"html" bson:"html"`
