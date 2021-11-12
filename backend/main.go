@@ -16,8 +16,8 @@ import (
 )
 
 func main() {
-	// create router
-	router := gin.Default()
+	// start message
+	fmt.Printf("[devotional/backend/jobs] server | starting | %s \n", time.Now())
 
 	// create database client
 	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("DEVOTIONAL_BACKEND_MONGO_URI")))
@@ -38,17 +38,20 @@ func main() {
 	// define collection
 	collection := client.Database("devotional").Collection("devotional")
 
-	// route definitions
-	router.GET("/devotional", func(c *gin.Context) { handler.GetDevotional(c, collection) })
-	router.GET("/devotionals", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
-	router.GET("/health", func(c *gin.Context) { handler.GetHealth(c) })
-
 	// start jobs
 	job := cron.New()
 	fmt.Printf("[devotional/backend/jobs] scrape | scheduling %s | %s \n", os.Getenv("DEVOTIONAL_BACKEND_SCRAPER_FREQ"), time.Now())
 	job.AddFunc(os.Getenv("DEVOTIONAL_BACKEND_SCRAPER_FREQ"), func() { jobs.PutScraped(collection, ctx) })
 	job.Start()
 	// defer job.Stop()
+
+	// create router
+	router := gin.Default()
+
+	// route definitions
+	router.GET("/devotional", func(c *gin.Context) { handler.GetDevotional(c, collection) })
+	router.GET("/devotionals", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
+	router.GET("/health", func(c *gin.Context) { handler.GetHealth(c) })
 
 	// default port 8080 can be changed via env
 	router.Run()
