@@ -20,3 +20,14 @@ non error log format
 ```
 [repo/project/type] action | result | timestamp
 ```
+
+
+
+## ⚙️ Environment Variables
+
+| ENV                                    | Default                      |
+| -------------------------------------- | ---------------------------- |
+| PORT                                   | 8080                         |
+| DEVOTIONAL_BACKEND_SCRAPER_FREQ        | @every 30s                   |
+| DEVOTIONAL_BACKEND_SCRAPER_LINK        | http://localhost:8081        |
+| DEVOTIONAL_BACKEND_MONGO_URI           | mongodb://127.0.0.1:27017/   |
