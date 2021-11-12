@@ -41,6 +41,7 @@ func main() {
 	// route definitions
 	router.GET("/devotional", func(c *gin.Context) { handler.GetDevotional(c, collection) })
 	router.GET("/devotionals", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
+	router.GET("/health", func(c *gin.Context) { handler.GetHealth(c) })
 
 	// start jobs
 	job := cron.New()
