@@ -28,9 +28,6 @@ This is the respository for my devotionals application.
   - [ ] testing
 - [ ] Backend
   - [ ] testing
-  - [ ] create getEnv function to allow for default values
-  - [x] give backend a proper readme
-  - [ ] make pagination 10/page
 - [ ] Frontend
   - [ ] start
 
