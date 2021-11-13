@@ -11,3 +11,32 @@ services:
     ports:
       - 27017:27017
     restart: unless-stopped
+
+  scraper:
+    build:
+      dockerfile: dockerfile
+      context: ${PWD}/scraper
+    container_name: devotional_scraper
+    tty: true
+    environment:
+      - PORT=8081
+    ports:
+      - 8081:8081
+
+  backend:
+    build:
+      dockerfile: dockerfile
+      context: ${PWD}/backend
+    container_name: devotional_backend
+    tty: true
+    environment:
+      - PORT=8080
+      - DEVOTIONAL_BACKEND_SCRAPER_FREQ=@every 30s # reference for valid frequencies: github.com/robfig/cron/v3
+      - DEVOTIONAL_BACKEND_SCRAPER_LINK=http://host.docker.internal:8081
+      - DEVOTIONAL_BACKEND_MONGO_URI=mongodb://host.docker.internal:27017
+      - DEVOTIONAL_BACKEND_PAGE_SIZE=10
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongodb
+      - scraper

@@ -26,8 +26,10 @@ This is the respository for my devotionals application.
 
 - [ ] Scraper
   - [ ] testing `package/handlers`
+  - [ ] add rate-limiting
 - [ ] Backend
   - [ ] testing
+  - [ ] add rate-limiting
 - [ ] Frontend
   - [ ] start
 

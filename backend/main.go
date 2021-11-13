@@ -39,12 +39,12 @@ func main() {
 	collection := client.Database("devotional").Collection("devotional")
 
 	// start jobs
-	job := cron.New()
+	crons := cron.New()
 	freq := u.GetEnvUtil("DEVOTIONAL_BACKEND_SCRAPER_FREQ", "@every 30s")
 	fmt.Printf("[devotional/backend/jobs] scrape | scheduling %s | %s \n", freq, time.Now())
-	job.AddFunc(freq, func() { jobs.PutScraped(collection, ctx) })
-	job.Start()
-	defer job.Stop()
+	crons.AddFunc(freq, func() { jobs.PutScraped(collection, ctx) })
+	crons.Start()
+	defer crons.Stop()
 
 	// create router
 	router := gin.Default()
