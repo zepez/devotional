@@ -39,13 +39,13 @@ Assumes that your current directory is this project root (devotional/scraper)
 
 - Running 
   
-  `docker run -p 8081:8080 <image_hash>`
+  `docker run -p 8081:8081 <image_hash>`
 
 
 ## ⚙️ Environment Variables
 
 | ENV         | Default     |
 | ----------- | ----------- |
-| PORT        | 8080        |
+| PORT        | 8081        |
 
   

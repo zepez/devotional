@@ -8,6 +8,7 @@ import (
 	"github.com/patrickmn/go-cache"
 
 	handler "scraper/package/handlers"
+	u "scraper/package/utils"
 )
 
 func main() {
@@ -26,5 +27,5 @@ func main() {
 	router.GET("/", func(c *gin.Context) { handler.GetRoot(c, cache) })
 
 	// start server
-	router.Run()
+	router.Run(":" + u.GetEnvUtil("PORT", "8081"))
 }
