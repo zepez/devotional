@@ -18,9 +18,9 @@ func PutDevotionalUtil(collection *mongo.Collection, ctx context.Context, devoti
 		log.Fatalln(err)
 	}
 
-	// check if existing devotional already exists
+	// // check if existing devotional already exists
 	var existingDevotional def.Devotional
-	err = collection.FindOne(ctx, bsonDevotional).Decode(&existingDevotional)
+	err = collection.FindOne(ctx, bson.M{"target_date": devotional.Target_Date}).Decode(&existingDevotional)
 
 	// log if existing is found
 	if existingDevotional.Source != "" {
@@ -32,7 +32,8 @@ func PutDevotionalUtil(collection *mongo.Collection, ctx context.Context, devoti
 		fmt.Printf("[devotional/backend/utils] create | insert | %s \n", time.Now())
 		_, err = collection.InsertOne(ctx, bsonDevotional)
 	} else if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
+		return
 	}
 
 	return

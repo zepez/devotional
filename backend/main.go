@@ -44,7 +44,7 @@ func main() {
 	fmt.Printf("[devotional/backend/jobs] scrape | scheduling %s | %s \n", freq, time.Now())
 	job.AddFunc(freq, func() { jobs.PutScraped(collection, ctx) })
 	job.Start()
-	// defer job.Stop()
+	defer job.Stop()
 
 	// create router
 	router := gin.Default()
