@@ -4,7 +4,6 @@ import (
 	def "backend/package/definitions"
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -15,7 +14,8 @@ func PutDevotionalUtil(collection *mongo.Collection, ctx context.Context, devoti
 	// convert input devotional to bson
 	bsonDevotional, err := bson.Marshal(devotional)
 	if err != nil {
-		log.Fatalln(err)
+		fmt.Println(err)
+		return
 	}
 
 	// // check if existing devotional already exists
