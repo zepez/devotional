@@ -25,7 +25,7 @@ This is the respository for my devotionals application.
 ## ✅ To do
 
 - [ ] Scraper
-  - [ ] testing
+  - [ ] testing `package/handlers`
 - [ ] Backend
   - [ ] testing
 - [ ] Frontend
