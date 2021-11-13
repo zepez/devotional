@@ -6,14 +6,13 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 
 	def "backend/package/definitions"
 )
 
 func GetScrapedUtil() def.Devotional {
 
-	res, err := http.Get(os.Getenv("DEVOTIONAL_BACKEND_SCRAPER_LINK"))
+	res, err := http.Get(GetEnvUtil("DEVOTIONAL_BACKEND_SCRAPER_LINK", "http://localhost:8081"))
 	if err != nil {
 		log.Fatalln(err)
 	}

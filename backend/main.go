@@ -3,10 +3,10 @@ package main
 import (
 	handler "backend/package/handlers"
 	jobs "backend/package/jobs"
+	u "backend/package/utils"
 	"context"
 	"fmt"
 	"log"
-	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -20,7 +20,7 @@ func main() {
 	fmt.Printf("[devotional/backend/server] server | starting | %s \n", time.Now())
 
 	// create database client
-	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("DEVOTIONAL_BACKEND_MONGO_URI")))
+	client, err := mongo.NewClient(options.Client().ApplyURI(u.GetEnvUtil("DEVOTIONAL_BACKEND_MONGO_URI", "mongodb://127.0.0.1:27017/")))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -40,8 +40,9 @@ func main() {
 
 	// start jobs
 	job := cron.New()
-	fmt.Printf("[devotional/backend/jobs] scrape | scheduling %s | %s \n", os.Getenv("DEVOTIONAL_BACKEND_SCRAPER_FREQ"), time.Now())
-	job.AddFunc(os.Getenv("DEVOTIONAL_BACKEND_SCRAPER_FREQ"), func() { jobs.PutScraped(collection, ctx) })
+	freq := u.GetEnvUtil("DEVOTIONAL_BACKEND_SCRAPER_FREQ", "@every 30s")
+	fmt.Printf("[devotional/backend/jobs] scrape | scheduling %s | %s \n", freq, time.Now())
+	job.AddFunc(freq, func() { jobs.PutScraped(collection, ctx) })
 	job.Start()
 	// defer job.Stop()
 
@@ -54,5 +55,5 @@ func main() {
 	router.GET("/health", func(c *gin.Context) { handler.GetHealth(c) })
 
 	// default port 8080 can be changed via env
-	router.Run()
+	router.Run(":" + u.GetEnvUtil("PORT", "8080"))
 }
