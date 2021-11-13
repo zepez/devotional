@@ -18,8 +18,14 @@ func GetDevotionalsUtil(collection *mongo.Collection, page string) ([]def.Devoti
 		return results, 400
 	}
 
+	limit := GetEnvUtil("DEVOTIONAL_BACKEND_PAGE_SIZE", "10")
+	limitInt, err := strconv.ParseInt(limit, 10, 64)
+	if err != nil {
+		return results, 500
+	}
+
 	findOptions := options.Find()
-	findOptions.SetLimit(3)
+	findOptions.SetLimit(limitInt)
 	findOptions.SetSkip(pageInt)
 
 	cursor, err := collection.Find(context.TODO(), bson.D{}, findOptions)

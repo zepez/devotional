@@ -28,6 +28,10 @@ Assumes that your current directory is this project root (devotional/backend)
   DEVOTIONAL_BACKEND_SCRAPER_FREQ='@every 30s' DEVOTIONAL_BACKEND_SCRAPER_LINK='http://127.0.0.1:8081' DEVOTIONAL_BACKEND_MONGO_URI="mongodb://127.0.0.1:27017/" PORT=8080 ./backend
   ```
 
+  or with default envs
+
+  ` ./backend `
+
 ## 🐳 Docker 
 
 - Building
@@ -37,8 +41,12 @@ Assumes that your current directory is this project root (devotional/backend)
 - Running 
   
   ```
-  docker run -e DEVOTIONAL_BACKEND_SCRAPER_FREQ='@every 30s' -e DEVOTIONAL_BACKEND_SCRAPER_LINK='http://host.docker.internal:8081' -e DEVOTIONAL_BACKEND_MONGO_URI="mongodb://host.docker.internal:27017/" -e PORT=8080 64ea5e
+  docker run -e DEVOTIONAL_BACKEND_SCRAPER_FREQ='@every 30s' -e DEVOTIONAL_BACKEND_SCRAPER_LINK='http://host.docker.internal:8081' -e DEVOTIONAL_BACKEND_MONGO_URI="mongodb://host.docker.internal:27017/" -e PORT=8080 <image_hash>
   ```
+
+  or with default envs
+
+  `docker run -p 8080:8080 <image_hash>`
 
 ## ⚙️ Environment Variables
 
@@ -48,3 +56,4 @@ Assumes that your current directory is this project root (devotional/backend)
 | DEVOTIONAL_BACKEND_SCRAPER_FREQ        | @every 30s                   |
 | DEVOTIONAL_BACKEND_SCRAPER_LINK        | http://localhost:8081        |
 | DEVOTIONAL_BACKEND_MONGO_URI           | mongodb://127.0.0.1:27017/   |
+| DEVOTIONAL_BACKEND_PAGE_SIZE           | 10                           |
