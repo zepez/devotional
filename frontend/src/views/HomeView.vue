@@ -12,6 +12,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import api from "../config/axios";
+
+const test = api.get("/devotionals/0")
+	.then(res => res.data)
+	.catch(e => console.log(e));
+
+console.log(test);
 
 interface Devotional {
 	name: string;
