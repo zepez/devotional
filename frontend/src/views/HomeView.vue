@@ -2,8 +2,9 @@
 	<div class="container">
 		<ul class="-my-3 divide-y divide-gray-200">
 			<li v-for="devotional in devotionals" :key="devotional.name" class="py-3">
+				<img :src="devotional.image" :alt="devotional.name" />
 				<h4 class="font-semibold text-xl">{{ devotional.name }}</h4>
-				<p>{{ devotional.plain_text }}</p>
+				<p>{{ devotional.plain_text.substring(0, 100) + "..." }}</p>
 			</li>
 		</ul>
 	</div>
@@ -14,27 +15,23 @@
 import { defineComponent } from "vue";
 import api from "../config/axios";
 
-const test = api.get("/devotionals/0")
+
+interface Devotional {
+	_id: string;
+	source: string;
+	target_date: string;
+	name: string;
+	image: string;
+	html: string;
+	plain_text: string;
+	created_at: string;
+	updated_at: string;
+}
+
+const devotionals = await api.get("/devotionals/0")
 	.then(res => res.data)
 	.catch(e => console.log(e));
 
-console.log(test);
-
-interface Devotional {
-	name: string;
-	plain_text: string;
-}
-
-const devotionals = [
-	{
-		name: "testing1",
-		plain_text: "testing plain text"
-	},
-	{
-		name: "testing2",
-		plain_text: "testing plain text"
-	}
-];
 
 export default defineComponent({
 	data() {
