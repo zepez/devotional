@@ -29,7 +29,7 @@ This is the respository for my devotionals application.
   - [ ] add rate-limiting
 - [ ] Backend
   - [ ] testing
-  - [ ] configure cors properly
+  - [x] configure cors properly
   - [ ] add rate-limiting
 - [ ] Frontend
   - [ ] start
