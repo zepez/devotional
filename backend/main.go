@@ -9,6 +9,7 @@ import (
 	"log"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/robfig/cron/v3"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -53,6 +54,9 @@ func main() {
 	router.GET("/devotional/:id", func(c *gin.Context) { handler.GetDevotional(c, collection) })
 	router.GET("/devotionals/:page", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
 	router.GET("/health", func(c *gin.Context) { handler.GetHealth(c) })
+
+	// configure cors
+	router.Use(cors.Default())
 
 	// default port 8080 can be changed via env
 	router.Run(":" + u.GetEnvUtil("PORT", "8080"))
