@@ -1,6 +1,6 @@
 <template>
 	<div class="bg-white pt-8 pb-6">
-		<h1 class="text-5xl text-center font-semibold mb-6">Vue.js Devotionals Application</h1>
+		<h1 class="text-5xl text-center font-semibold mb-6">zepez / devotional demo</h1>
 		<nav>
 			<ul class="flex justify-center flex-wrap">
 				<li v-for="link in navLinks" :key="link.name" class="mx-8 px-4 my-2 text-2xl border-2 border-gray-800">

@@ -1,31 +1,31 @@
 <template>
-	<p>devotional component</p>
+	<div class="container">
+		<h1>{{ devotional.name }}</h1>
+		<div v-html="devotional.html"></div>
+	</div>
 </template>
 
-<!-- <script lang="ts">
+
+<script lang="ts">
 import { defineComponent } from "vue";
+import api from "../config/axios";
 
-interface Devotional {
-	name: string;
-	plain_text: string;
-}
+const getById = async (id:string) => {
+	const response = await api.get(`/devotional/${id}`)
+		.then(res => res.data)
+		.catch(e => console.error(e));
+	
+	return response;
+};
 
-const devotionals = [
-	{
-		name: "testing1",
-		plain_text: "testing plain text"
-	},
-	{
-		name: "testing2",
-		plain_text: "testing plain text"
-	}
-];
 
 export default defineComponent({
 	data() {
-		return {
-			devotionals: devotionals as Devotional[]
-		};
-	}
+		return { devotional: { name: "", html: "" } };
+	},
+
+	async created() {
+		this.devotional = await getById(this.$route.params.id.toString());
+	},
 });
-</script> -->
+</script>
