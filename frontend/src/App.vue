@@ -1,16 +1,13 @@
 <template>
-  <HomePage msg='Hello Vue 3 + TypeScript + Vite' />
+	<h1 class="text-2xl text-center py-4 font-semibold">Vue.js Devotionals Application</h1>
+  <router-view />
 </template>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.2rem;
+	background-color: #E4E7EB;
+	color: #222222;
+	min-height: 100vh;
 }
 </style>
-
-
-<script setup lang="ts">
-import HomePage from "./components/HomePage.vue";
-</script>

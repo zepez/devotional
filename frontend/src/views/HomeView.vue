@@ -1,9 +1,14 @@
 <template>
-	<div v-for="devotional in devotionals" :key="devotional.name">
-		<h1>{{ devotional.name }}</h1>
-		<p>{{ devotional.plain_text }}</p>
+	<div class="container">
+		<ul class="-my-3 divide-y divide-gray-200">
+			<li v-for="devotional in devotionals" :key="devotional.name" class="py-3">
+				<h4 class="font-semibold text-xl">{{ devotional.name }}</h4>
+				<p>{{ devotional.plain_text }}</p>
+			</li>
+		</ul>
 	</div>
 </template>
+
 
 <script lang="ts">
 import { defineComponent } from "vue";
