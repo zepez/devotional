@@ -5,7 +5,7 @@
 				<img :src="devotional.image" :alt="devotional.name" class="col-span-6 md:col-span-2 rounded-md"/>
 				<div class="col-span-6 md:col-span-4">
 					<h4 class="font-semibold text-2xl">{{ devotional.name }}</h4>
-					<p class="py-2 text-xs">{{ devotional.target_date }}</p>
+					<p class="py-1 text-sm">{{ formatTargetDate(devotional.target_date) }}</p>
 					<p>{{ devotional.plain_text.substring(0, 100) + "..." }}</p>
 				</div>
 			</li>
@@ -17,6 +17,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import api from "../config/axios";
+import formatTargetDate from "../utils/formatTargetDate";
 
 
 interface Devotional {
@@ -39,7 +40,8 @@ const devotionals = await api.get("/devotionals/0")
 export default defineComponent({
 	data() {
 		return {
-			devotionals: devotionals as Devotional[]
+			devotionals: devotionals as Devotional[],
+			formatTargetDate
 		};
 	}
 });
