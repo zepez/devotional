@@ -1,8 +1,9 @@
 <template>
-	<h1 class="text-2xl text-center py-4 font-semibold">Vue.js Devotionals Application</h1>
+	<Header />
+	<Copyright />
   <router-view />
 
-	<p class="text-center pb-4">All information sourced from <a href="https://lhm.org" target="_blank" class="underline">lhm.org</a></p>
+	<Copyright />
 </template>
 
 <style>
@@ -13,3 +14,16 @@
 	min-height: 100vh;
 }
 </style>
+
+
+<script lang="ts">
+import Header from "./components/HeaderLayout.vue";
+import Copyright from "./components/CopyRight.vue";
+
+export default {
+	components: {
+		Copyright,
+		Header
+	}
+};
+</script>

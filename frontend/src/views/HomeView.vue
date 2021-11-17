@@ -6,7 +6,7 @@
 				<div class="col-span-6 md:col-span-4">
 					<h4 class="font-semibold text-2xl">{{ devotional.name }}</h4>
 					<p class="py-1 text-sm">{{ formatTargetDate(devotional.target_date) }}</p>
-					<p>{{ devotional.plain_text.substring(0, 100) + "..." }}</p>
+					<p>{{ devotional.plain_text.substring(0, 200) + "..." }}</p>
 				</div>
 			</li>
 		</ul>
