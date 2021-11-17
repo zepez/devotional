@@ -50,13 +50,20 @@ func main() {
 	// create router
 	router := gin.Default()
 
+	// configure cors
+	router.Use(cors.New(cors.Config{
+		AllowMethods:     []string{"GET"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+		AllowAllOrigins:  true,
+		MaxAge:           12 * time.Hour,
+	}))
+
 	// route definitions
 	router.GET("/devotional/:id", func(c *gin.Context) { handler.GetDevotional(c, collection) })
 	router.GET("/devotionals/:page", func(c *gin.Context) { handler.GetDevotionals(c, collection) })
 	router.GET("/health", func(c *gin.Context) { handler.GetHealth(c) })
-
-	// configure cors
-	router.Use(cors.Default())
 
 	// default port 8080 can be changed via env
 	router.Run(":" + u.GetEnvUtil("PORT", "8080"))
