@@ -20,6 +20,7 @@
 import { defineComponent } from "vue";
 import api from "../config/axios";
 import formatTargetDate from "../utils/formatTargetDate";
+import { useMeta } from "vue-meta";
 
 
 const devotionals = await api.get("/devotionals/0")
@@ -31,8 +32,14 @@ export default defineComponent({
 	data() {
 		return {
 			devotionals: devotionals as Devotional[],
-			formatTargetDate
+			formatTargetDate,
 		};
+	},
+	setup() {
+		useMeta({
+			title: "home",
+			htmlAttrs: { lang: "en" }
+		});
 	}
 });
 </script>

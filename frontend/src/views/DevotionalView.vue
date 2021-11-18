@@ -28,47 +28,63 @@
 
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
+import { useMeta } from "vue-meta";
+import { useRoute } from "vue-router";
 import api from "../config/axios";
 import formatTargetDate from "../utils/formatTargetDate";
 import ShareDevotional from "../components/ShareDevotional.vue";
 import LabelText from "../components/LabelText.vue";
 
 
-const getById = async (id:string) => {
-	const response = await api.get(`/devotional/${id}`)
-		.then(res => res.data)
-		.catch(e => console.error(e));
-	
-	return response;
-};
-
-const getMore = async () => {
-	const response = await api.get("/devotionals/0")
-		.then(res => res.data)
-		.catch(e => console.error(e));
-	
-	return response;
-};
-
-
 export default defineComponent({
 	components: { ShareDevotional, LabelText },
-	data() {
-		return { 
-			devotional: {} as Devotional, 
-			more: [] as Devotional[],
-			formatTargetDate
+
+	setup() {
+		const devotional = ref({} as Devotional);
+		const more = ref([] as Devotional[]);
+		const route = useRoute();
+
+		const { meta } = useMeta({
+			title: "view", 
+			htmlAttrs: { lang: "en" }
+		});
+
+		const getById = async () => {
+			return await api.get(`/devotional/${route.params.id}`)
+				.then(res => res.data)
+				.catch(e => console.error(e));
 		};
-	},
 
-	async created() {
-		this.devotional = await getById(this.$route.params.id.toString());
-		this.more = await getMore();
-	},
+		const getMore = async () => {
+			return await api.get("/devotionals/0")
+				.then(res => res.data)
+				.catch(e => console.error(e));
+		};
 
-	async beforeRouteUpdate(to) {
-		this.devotional = await getById(to.params.id.toString());
+
+		onMounted(async () => {
+			more.value = await getMore();
+			devotional.value = await getById();
+
+			meta.title = devotional.value.name;
+			meta.description = devotional.value.plain_text.substring(0, 100) + "...";
+			meta.og = {
+				site_name: "github.com/zepez/devotional",
+				title: devotional.value.name + " | zepez/devotional",
+				description: devotional.value.plain_text.substring(0, 100) + "...",
+				image: devotional.value.image,
+				url: window.location.href
+			};
+			meta.twitter = {
+				title: devotional.value.name + " | zepez/devotional",
+				description: devotional.value.plain_text.substring(0, 100) + "...",
+				image: devotional.value.image,
+				card: "summary_large_image"
+			};
+		});
+
+		return { devotional, more, formatTargetDate };
 	},
 });
 </script>

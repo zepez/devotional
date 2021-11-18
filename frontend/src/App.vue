@@ -1,4 +1,7 @@
 <template>
+	<metainfo>
+		<template v-slot:title="{ content }">{{ content }} | zepez/devotional</template>
+	</metainfo>
 	<Header />
 	<Copyright />
   <router-view />
