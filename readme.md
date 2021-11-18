@@ -33,7 +33,13 @@ This is the respository for my devotionals application.
   - [ ] sort by most recent on paginated view
   - [ ] add rate-limiting
 - [ ] Frontend
-  - [ ] start
+  - [ ] hover effects on links
+  - [ ] SEO meta tags
+  - [ ] sharing meta tags
+  - [ ] clean up
+  - [ ] testing
+  - [ ] logo maybe?
+  - [ ] icons
 
 
 
