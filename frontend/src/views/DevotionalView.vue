@@ -15,7 +15,7 @@
 
 			<LabelText text="More devotionals:" />
 			<ul class="divide-y divide-gray-200 -my-3">
-				<li class="py-3" v-for="oneMore in more" :key="oneMore.name">
+				<li class="py-3 d-list-link" v-for="oneMore in more" :key="oneMore.name">
 					<router-link :to="'/d/' + oneMore.id">
 						<h4 class="font-semibold text-xl">{{ oneMore.name }}</h4>
 						<p>{{ oneMore.plain_text.substring(0, 85) + "..." }}</p>

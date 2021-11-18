@@ -2,7 +2,7 @@
 	<div class="container">
 		<ul class="-my-3 divide-y divide-gray-200">
 			<li v-for="devotional in devotionals" :key="devotional.name">
-				<router-link :to="'/d/' + devotional.id" class="py-3 grid grid-cols-6 gap-4">
+				<router-link :to="'/d/' + devotional.id" class="py-3 grid grid-cols-6 gap-4 home-list-link">
 					<img :src="devotional.image" :alt="devotional.name" class="col-span-6 md:col-span-2 rounded-md"/>
 					<div class="col-span-6 md:col-span-4">
 						<h4 class="font-semibold text-2xl">{{ devotional.name }}</h4>

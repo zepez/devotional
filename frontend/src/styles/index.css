@@ -10,3 +10,13 @@
 	max-width: 1000px;
 	margin: 30px auto 30px auto;
 }
+
+.home-list-link:hover div {
+	background-color: #FEFBEB;
+	border-radius: 5px;
+}
+
+.d-list-link:hover {
+	background-color: #FEFBEB;
+	border-radius: 5px;
+}
