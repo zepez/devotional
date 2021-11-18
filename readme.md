@@ -30,6 +30,7 @@ This is the respository for my devotionals application.
 - [ ] Backend
   - [ ] testing
   - [x] configure cors properly
+  - [ ] sort by most recent on paginated view
   - [ ] add rate-limiting
 - [ ] Frontend
   - [ ] start

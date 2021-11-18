@@ -18,6 +18,7 @@
 import { defineComponent } from "vue";
 
 const navLinks = [
+	{ name: "Home", href: "/", external: false },
 	{ name: "GitHub", href: "https://github.com/zepez/devotional", external: true },
 	{ name: "lhm.org", href: "https://lhm.org", external: true },
 	{ name: "Portfolio", href: "https://zep.sh", external: true }
