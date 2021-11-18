@@ -13,7 +13,7 @@
 		<div class="col-span-3 md:col-span-1 py-4 md:pl-4 md:py-0">
 			<ShareDevotional v-bind:devotional="devotional" />
 
-			<p class="font-semibold uppercase text-xs mb-1">More devotionals:</p>
+			<LabelText text="More devotionals:" />
 			<ul class="divide-y divide-gray-200 -my-3">
 				<li class="py-3" v-for="oneMore in more" :key="oneMore.name">
 					<router-link :to="'/d/' + oneMore.id">
@@ -32,6 +32,7 @@ import { defineComponent } from "vue";
 import api from "../config/axios";
 import formatTargetDate from "../utils/formatTargetDate";
 import ShareDevotional from "../components/ShareDevotional.vue";
+import LabelText from "../components/LabelText.vue";
 
 
 const getById = async (id:string) => {
@@ -52,7 +53,7 @@ const getMore = async () => {
 
 
 export default defineComponent({
-	components: { ShareDevotional },
+	components: { ShareDevotional, LabelText },
 	data() {
 		return { 
 			devotional: {} as Devotional, 
