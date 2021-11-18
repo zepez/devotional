@@ -16,6 +16,7 @@
 	</div>
 </template>
 
+
 <script lang="ts">
 import { defineComponent } from "vue";
 import LabelText from "../components/LabelText.vue";
@@ -27,13 +28,10 @@ export default defineComponent({
 	components: {
 		LabelText, ShareArray
 	},
-	data() {
+	setup() {
 		return {
-			currentUrl: "",
+			currentUrl: window.location.href
 		};
-	},
-	created: function() {
-		this.currentUrl = window.location.href;
 	}
 });
 </script>

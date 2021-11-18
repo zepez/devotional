@@ -2,8 +2,12 @@
 	<p class="font-semibold uppercase text-xs mb-1">{{ text }}</p>
 </template>
 
+
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+
+export default defineComponent({
 	props: ["text"]
-};
+});
 </script>

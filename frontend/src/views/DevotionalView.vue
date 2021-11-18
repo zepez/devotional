@@ -62,7 +62,6 @@ export default defineComponent({
 				.catch(e => console.error(e));
 		};
 
-
 		onMounted(async () => {
 			more.value = await getMore();
 			devotional.value = await getById();
@@ -70,7 +69,7 @@ export default defineComponent({
 			meta.title = devotional.value.name;
 			meta.description = devotional.value.plain_text.substring(0, 100) + "...";
 			meta.og = {
-				site_name: "github.com/zepez/devotional",
+				site_name: window.location.host,
 				title: devotional.value.name + " | zepez/devotional",
 				description: devotional.value.plain_text.substring(0, 100) + "...",
 				image: devotional.value.image,

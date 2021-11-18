@@ -17,29 +17,50 @@
 
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import api from "../config/axios";
 import formatTargetDate from "../utils/formatTargetDate";
 import { useMeta } from "vue-meta";
 
 
-const devotionals = await api.get("/devotionals/0")
-	.then(res => res.data)
-	.catch(e => console.log(e));
-
-
 export default defineComponent({
-	data() {
-		return {
-			devotionals: devotionals as Devotional[],
-			formatTargetDate,
-		};
-	},
 	setup() {
+		const devotionals = ref([] as Devotional[]);
+
 		useMeta({
 			title: "home",
-			htmlAttrs: { lang: "en" }
+			htmlAttrs: { lang: "en" },
+			description: "",
+			og: {
+				site_name: window.location.host,
+				title: "home | zepez/devotional",
+				description: "This is a demo project, showing off gihub.com/zepez/devotional. Made by Alex Zepezauer.",
+				image: window.location.host + "/social/share-card.jpg",
+				url: window.location.href
+			},
+			twitter: {
+				title: "home | zepez/devotional",
+				description: "This is a demo project, showing off gihub.com/zepez/devotional. Made by Alex Zepezauer.",
+				image: window.location.host + "/social/share-card.jpg",
+				card: "summary_large_image"
+			}
 		});
+
+		const getDevotionals = async () => {
+			return await api.get("/devotionals/0")
+				.then(res => res.data)
+				.catch(e => console.log(e));
+		};
+
+		onMounted(async () => {
+			devotionals.value = await getDevotionals();
+			console.log(window.location);
+		});
+
+		return {
+			devotionals,
+			formatTargetDate,
+		};
 	}
 });
 </script>

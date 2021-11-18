@@ -9,6 +9,7 @@
 	<Copyright />
 </template>
 
+
 <style>
 #app {
   font-size: 1.2rem;
@@ -20,13 +21,15 @@
 
 
 <script lang="ts">
+import { defineComponent } from "vue";
 import Header from "./components/HeaderLayout.vue";
 import Copyright from "./components/CopyRight.vue";
 
-export default {
+
+export default defineComponent({
 	components: {
 		Copyright,
 		Header
 	}
-};
+});
 </script>
